@@ -28,8 +28,8 @@ class Skill(models.Model):
 
 class JobHistory(models.Model):
     resume = models.ForeignKey(Resume, related_name='job_history', on_delete=models.CASCADE)
-    start_date = models.CharField(max_length=255)
-    end_date = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
     job_title = models.CharField(max_length=255)
     description = models.TextField()
 
