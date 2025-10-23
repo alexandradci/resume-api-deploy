@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Resume(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='resumes')
     name = models.CharField(max_length=255)
     bio = models.TextField()
     address = models.CharField(max_length=255)
