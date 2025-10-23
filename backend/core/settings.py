@@ -139,3 +139,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Celery configuration (we use Redis)
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+# Local email testing — print emails to the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
