@@ -51,3 +51,23 @@ class ResumeAPITests(APITestCase):
         data = {"bio": "Hacked bio"}
         response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_resume_detail_view(self):
+        """Owner can view a single resume"""
+        url = f"/api/v3/resumes/{self.resume.id}/"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertContains(response, "Test Resume")
+
+    def test_resume_delete(self):
+        """Owner can delete their own resume"""
+        url = f"/api/v3/resumes/{self.resume.id}/"
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Resume.objects.count(), 0)
+
+    def test_unauthenticated_user_cannot_access(self):
+        """Anonymous users cannot view resumes"""
+        self.client.logout()
+        response = self.client.get("/api/v3/resumes/")
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
