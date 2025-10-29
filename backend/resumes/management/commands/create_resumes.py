@@ -41,7 +41,6 @@ class Command(BaseCommand):
                 address=f"{random.randint(10, 99)} Berlin Street, Germany",
                 job_history="\n".join(random.sample(sample_jobs, 2)),
                 education_history="\n".join(random.sample(sample_education, 2)),
-                created_at=timezone.now(),
             )
             self.stdout.write(self.style.SUCCESS(f"Created resume for {resume.name}"))
 
