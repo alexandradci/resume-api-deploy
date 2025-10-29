@@ -26,7 +26,8 @@ class ResumeReorderView(APIView):
         try:
             values = [int(data[k]) for k in ("job_history", "skills", "education_history")]
         except (ValueError, TypeError):
-            return Response({"detail": "Values must be integers 0,1,2."}, status=400)
+            return Response({"detail": "Values must be integers 0,1,2."}, status=status.HTTP_400_BAD_REQUEST)
+
 
         if set(values) != {0, 1, 2}:
             return Response({"detail": "Values must be 0,1,2 with no duplicates."}, status=400)
