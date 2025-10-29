@@ -28,7 +28,7 @@ class ResumeReorderView(APIView):
         except (ValueError, TypeError):
             return Response({"detail": "Values must be integers 0,1,2."}, status=400)
 
-        if sorted(values) != [0, 1, 2]:
+        if set(values) != {0, 1, 2}:
             return Response({"detail": "Values must be 0,1,2 with no duplicates."}, status=400)
 
         # 3) Validate that resume has data for all sections
