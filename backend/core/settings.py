@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'resumes.apps.ResumesConfig',
+    "drf_spectacular",
 ]
 
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
@@ -52,6 +54,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ]
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Our awesome class API',
+    'DESCRIPTION': 'Rock your world with this API',
+    'VERSION': '0.0.1',  # Semantic versioning (semver)
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 MIDDLEWARE = [

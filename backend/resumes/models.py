@@ -4,12 +4,17 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Resume(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='resumes')
-    name = models.CharField(max_length=255)
-    bio = models.TextField()
-    address = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='resumes',
+        help_text="The user who owns this resume."
+    )
+    name = models.CharField(max_length=255, help_text="Full name of the person.")
+    bio = models.TextField(help_text="A short biography or profile summary.")
+    address = models.CharField(max_length=255, help_text="Current address of the user.")
+    created_at = models.DateTimeField(auto_now_add=True, help_text="Timestamp when the resume was created.")
+    updated_at = models.DateTimeField(auto_now=True, help_text="Timestamp when the resume was last updated.")
 
     def __str__(self):
         return self.name
