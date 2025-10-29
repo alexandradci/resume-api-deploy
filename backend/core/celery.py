@@ -1,6 +1,9 @@
 from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
+import dotenv
+
+dotenv.load_dotenv()
 
 # Important: use backend.core.settings, not just core.settings
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
