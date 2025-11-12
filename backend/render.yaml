@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: resume-api
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn core.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
