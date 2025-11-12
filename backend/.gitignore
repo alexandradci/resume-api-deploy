@@ -21,3 +21,4 @@ Thumbs.db
 *.tar.gz
 
 .env
+staticfiles/
