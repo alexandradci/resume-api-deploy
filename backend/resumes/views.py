@@ -5,11 +5,14 @@ from .permissions import IsOwnerOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import AllowAny
+
+
 
 class ResumeList(generics.ListCreateAPIView):      # list + create
     queryset = Resume.objects.all()
     serializer_class = ResumeSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)  # set owner automatically
