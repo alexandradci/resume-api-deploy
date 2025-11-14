@@ -5,16 +5,29 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   const API_URL = import.meta.env.VITE_API_URL;
+  const TOKEN = import.meta.env.VITE_API_TOKEN;
 
   useEffect(() => {
-    fetch(`${API_URL}/api/v3/resumes/`)
-      .then(response => response.json())
+    console.log("Fetching from:", `${API_URL}/api/v3/resumes/`);
+
+    fetch(`${API_URL}/api/v3/resumes/`, {
+      headers: {
+        "Authorization": `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then(res => {
+        console.log("Status:", res.status);
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return res.json();
+      })
       .then(data => {
+        console.log("DATA:", data);
         setResumes(data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error("Error fetching resumes:", error);
+      .catch(err => {
+        console.error("Fetch error:", err);
         setLoading(false);
       });
   }, []);
@@ -24,6 +37,9 @@ function App() {
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
       <h1>Resumes</h1>
+
+      {resumes.length === 0 && <p>No resumes found.</p>}
+
       {resumes.map((resume) => (
         <div
           key={resume.id}
