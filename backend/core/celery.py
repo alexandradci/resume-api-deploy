@@ -16,6 +16,6 @@ app.autodiscover_tasks()
 @app.task(bind=True)
 def debug_task(self):
     from django.conf import settings
-    print(f"DEBUG EMAIL_HOST: {settings.EMAIL_HOST}")
-    print(f"DEBUG EMAIL_USER: {settings.EMAIL_HOST_USER}")
+    pprint(f"DEBUG EMAIL_HOST: {settings.EMAIL_HOST}")
+    print(f"DEBUG EMAIL_USER is set: {bool(settings.EMAIL_HOST_USER)}")
     print(f"Request: {self.request!r}")
